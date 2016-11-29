@@ -112,7 +112,7 @@ if [ "$exclude_if_already_boxed" = "true" ]; then
                                 rc=$?
                                 if [ "$rc" = "0" ] && [ "$delete" = "true" ]; then
                                         check_debug "Prüfe die Itegrität von Folge: $folgencount"
-                                        if [ "$(( `du -sc $ordner/VIDEO_TS/${folgen}*.VOB | grep insges | tr '\t' ' ' | cut -d ' ' -f 1` - 200000 ))" -gt "$(du -sc $folgenname | grep insges | tr '\t' ' ' | cut -d ' ' -f 1 )" ]; then
+                                        if [ "$(( `du -sc $ordner/VIDEO_TS/${folgen}*.VOB | tail -n 1 | tr '\t' ' ' | cut -d ' ' -f 1` - 200000 ))" -gt "$(du -sc $folgenname | grep insges | tr '\t' ' ' | cut -d ' ' -f 1 )" ]; then
                                                 echo "$Ordner Folge Nummer: $folgencount WIRD NICHT GELÖSCHT. MANUELL PRÜFEN!"
                                         else
                                                 check_debug "LÖSCHEN der Dateien gestartet."

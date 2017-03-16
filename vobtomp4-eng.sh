@@ -5,9 +5,9 @@ exclude_if_already_boxed=true
 folgencount=0
 
 function print_help() {
-        echo "This si a help."
-        echo "The script has to be installed in the same folder where all Movie folders are."
-        echo "ex: VIDEO: /home/Video/Tet, /home/Video/Alex   SKRIPT: /home/Video/gettomp4-eng.sh"
+        echo "This is a help."
+        echo "The script has to be installed in the same folder where all movie folders are."
+        echo "ex: VIDEO: /home/Video/Tet, /home/Video/Alex   SCRIPT: /home/Video/gettomp4-eng.sh"
         echo 'There is the variable: $exclude_if_already_boxed, which can be set to true or false.'
         echo "This variable does the following:"
         echo ""
@@ -126,19 +126,19 @@ if [ "$exclude_if_already_boxed" = "true" ]; then
                 folgencount=0
         done
 else
-        check_debug "Benutze Modus OHNE Berücksichtigung vorhandener Dateien"
+        check_debug "User mode without regognition of existing files"
         OIFS="$IFS"
         IFS=$'\n'
         for ordner in $(find $working_path/** | grep -v 'gettomp4.sh' | grep -v _TS); do
-                check_debug "Bearbeite Ordner: $ordner"
+                check_debug "Working on folder: $ordner"
                 ordnername=$(echo $ordner | tr '/' '\n' | tail -n1)
-                check_debug "Der Ordnername des aktuellen Ordners lautet: $ordnername"
+                check_debug "The name of the current folder is: $ordnername"
                 folgenanzahl=$(find $ordner/VIDEO_TS/* | grep -i vob | tr '/' '\n' | tail -n1 | cut -d '_' -f 1,2 | uniq | wc -l)
-                check_debug "Im Ordner sind so viele Folgen vorhanden: $folgenanzahl"
+                check_debug "The current folder has that many parts: $folgenanzahl"
                 for folgen in $(find $ordner/VIDEO_TS/* | grep -i vob | tr '/' '\n' | tail -n1 | cut -d '_' -f 1,2 | uniq); do
-                        check_debug "Folgende folge wurde erkannt: $folgen"
+                        check_debug "Recognized following part: $folgen"
                         folgencount=$(( $folgencount + 1 ))
-                        check_debug "Aktuell wird Folge: $folgencount bearbeitet."
+                        check_debug "Working on part: $folgencount"
                         if [ "$folgenanzahl" = "1" ]; then
                                 folgenname=$(echo "$ordner/VIDEO_TS/$ordnername.mp4")
                         else
@@ -146,7 +146,7 @@ else
                         fi
                         find $ordner/VIDEO_TS/*
                         filecount=$(find $ordner/VIDEO_TS/* | grep -i $folgen | grep -i -c vob)
-                        check_debug "Die Folge hat so viele Folgenteile: $filecount"
+                        check_debug "The part has that many files: $filecount"
                         i="0"
                         while [ $i -lt $filecount ]; do
                                 i=$(( $i + 1 ))
@@ -156,8 +156,8 @@ else
                                         parts="$parts|$ordner/VIDEO_TS/${folgen}_${i}.VOB"
                                 fi
                         done
-                        check_debug "Liste der Parts ist folgende: $parts"
-                        check_debug "Beginnt Umpacken der Folge $folgenname"
+                        check_debug "List of files are: $parts"
+                        check_debug "Begin with repack of: $folgenname"
                         ffmpeg -y -fflags +genpts -i concat:"$parts" -c:v copy -c:a copy -map 0:v:0 -map 0:a $folgenname
                         unset parts
                         filecount=0

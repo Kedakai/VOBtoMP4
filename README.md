@@ -1,4 +1,24 @@
 # VOBtoMP4
+
+Ein Script welche alle Untouched VOB Dateien zu einem MP4 zusammenfasst.
+
+Was dieses Skript kann:
+- Erkennung wie viele Folgen in einem VIDEO_TS Ordner sind und die Funktion sie alle korrekt zusammenzufassen.
+- Automatisches Löschen der Originaldateien nach zusammenfassen (Absolut sicher!)
+- Dynamische Dateinamen
+- Alles neu bauen Modus
+- Es wird jede Audiospur mit in die MP4 packen
+
+Es gibt eine Vorraussetzungen, die eingehalten werden müssen:
+- Lass das Skript alleine! Es tut Dinge zuverlässig. Nicht pfuschen.
+- Die Struktur der Ordner muss folgendermaßen sein:
+    /home/Video/Tet/VIDEO_TS/dateien
+    /home/Video/Tet 2/VIDEO_TS/dateien
+- Bei dieser Skruktur muss das Skript an diesem Ort liegen:
+    /home/Video/vobtomp4.sh
+
+------------------------------------------------------------------------------------------------------------------------
+
 A script, that converts all VOB files to a single MP4
 
 (English Version available soon!) Only German currently.

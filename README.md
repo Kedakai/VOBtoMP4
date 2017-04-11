@@ -21,8 +21,6 @@ Es gibt eine Vorraussetzungen, die eingehalten werden müssen:
 
 A script, that converts all VOB files to a single MP4
 
-(English Version available soon!) Only German currently.
-
 What this script is able to do:
 - recognize how much episodes are in a VIDEO_TS folder and manage to convert them all correctly.
 - autodelete after converting (It's safe.)
